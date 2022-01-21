@@ -25,9 +25,7 @@
     
     $product = count($products);
     
-    
-    //you can set any date which you want
-    
+        
     $query = ['date_min' => '2022-01-01', 'date_max' => '2023-01-20'];
     
     $sales = $woocommerce->get('reports/sales', $query);
@@ -92,10 +90,9 @@
                      </div>
              </div>
              
-<?php  $results = $woocommerce->get('orders'); ?>
-           
+             <?php  $results = $woocommerce->get('orders'); ?>
 
-            <div class="container">
+             <div class="container">
                              <h2 class="sub-header">Orders List</h2>
                                <div class='table-responsive'>
                                    <table id='myTable' class='table table-striped table-bordered'>
@@ -111,22 +108,22 @@
                                            </tr>
                                        </thead>
                                        <tbody>
-<?php
-               $results = json_decode(json_encode($results), true);
-                              
-               foreach($results as $details){
-               
-               echo "<tr><td>" . $details["id"]."</td>
-                         <td>" . $details["billing"]["first_name"].$details["billing"]["last_name"]."</td>
-                         <td>" . $details["shipping"]["address_1"]."</td>
-                         <td>" . $details["billing"]["phone"]."</td>
-                         <td>" . $details["date_created"]."</td>
-                         <td>" . $details["status"]."</td>
-                         <td><a class='open-AddBookDialog btn btn-primary' data-target='#myModal' data-id=".$details['id']." data-toggle='modal'>Update</a>
-                         <a class='open-deleteDialog btn btn-danger' data-target='#myModal1' data-id=".$details['id']." data-toggle='modal'>Delete</a></td></tr>";
-              }
-?></tbody>
-                                   </table>
+                                       <?php
+                                       $results = json_decode(json_encode($results), true);
+
+                                       foreach($results as $details){
+
+                                       echo "<tr><td>" . $details["id"]."</td>
+                                                 <td>" . $details["billing"]["first_name"].$details["billing"]["last_name"]."</td>
+                                                 <td>" . $details["shipping"]["address_1"]."</td>
+                                                 <td>" . $details["billing"]["phone"]."</td>
+                                                 <td>" . $details["date_created"]."</td>
+                                                 <td>" . $details["status"]."</td>
+                                                 <td><a class='open-AddBookDialog btn btn-primary' data-target='#myModal' data-id=".$details['id']." data-toggle='modal'>Update</a>
+                                                 <a class='open-deleteDialog btn btn-danger' data-target='#myModal1' data-id=".$details['id']." data-toggle='modal'>Delete</a></td></tr>";
+                                       }?>
+                                         </tbody>
+                                         </table>
                                </div>
               </div>
               <div class="modal fade" id="myModal" role="dialog">
@@ -161,23 +158,23 @@
                    </div>
                </div>
             </div>
-<?php
-            if (isset($_POST['btn-update'])) {
-            $status = $_POST['bookId'];
-            $st = $_POST['ostatus'];
-            $woocommerce->put('orders/' . $status, array(
-            'status' => $st
-            ));
-            echo '<script>window.location.href = "dashboard.php";</script>';
-            //header('Location: dashboard.php');
-            }
-?>
-<script>
-    $(document).on("click", ".open-AddBookDialog", function() {
-       var myBookId = $(this).data('id');
-       $(".modal-body #bookId").val(myBookId);
-   });
-</script> 
+            <?php
+                        if (isset($_POST['btn-update'])) {
+                        $status = $_POST['bookId'];
+                        $st = $_POST['ostatus'];
+                        $woocommerce->put('orders/' . $status, array(
+                        'status' => $st
+                        ));
+                        echo '<script>window.location.href = "dashboard.php";</script>';
+                        //header('Location: dashboard.php');
+                        }
+            ?>
+            <script>
+                $(document).on("click", ".open-AddBookDialog", function() {
+                   var myBookId = $(this).data('id');
+                   $(".modal-body #bookId").val(myBookId);
+               });
+            </script> 
             <div class="modal fade" id="myModal1" role="dialog">
                <div class="modal-dialog">
                    <!-- Modal content-->
@@ -250,10 +247,10 @@
                                       </table>
                                   </div>
               </div>
-<?php
-    $products = $woocommerce->get('products');
-    
-?>
+                <?php
+                    $products = $woocommerce->get('products');
+
+                ?>
                 <div class="container">
                                                   <h2 class="sub-header">Products List</h2>
                                                   <div class='table-responsive'>
@@ -269,7 +266,7 @@
                                                               </tr>
                                                           </thead>
                                                           <tbody>
-                                                              <?php
+                                  <?php
                                   $products = json_decode(json_encode($products), true);
                                   foreach($products as $product){
                                   echo "<tr><td>" . $product["sku"]."</td>
